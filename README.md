@@ -1,6 +1,6 @@
 # 🚗 GyQ Concesionaria Multimarca — Sistema de Gestión de Inventario y Ventas
 
-Proyecto práctico desarrollado en **Java** para la asignatura **Programación II** de la **Tecnicatura Universitaria en Programación (UTN - Facultad Regional Resistencia)**[cite: 4, 15].
+Proyecto práctico desarrollado en **Java** para la asignatura **Programación II** de la **Tecnicatura Universitaria en Programación (UTN - Facultad Regional Resistencia)**
 
 El sistema implementa una aplicación de consola orientada a objetos para administrar el inventario, catálogo dinámico de marcas/modelos y ventas de vehículos multimarca (**Automóviles**, **Camionetas** y **Motocicletas**), aplicando arquitectura en capas, encapsulamiento estricto, herencia, polimorfismo, manejo de excepciones personalizadas y colecciones genéricas.
 
@@ -10,16 +10,16 @@ El sistema implementa una aplicación de consola orientada a objetos para admini
 
 * **Gallardo, Guadalupe** — Legajo: `29300` — GitHub: ``
 * **Quintero, Camila** — Legajo: `30300` — GitHub: ``
-* *(Agregar o quitar líneas según corresponda)*
+
 
 **Cátedra:** Programación II — Ciclo Lectivo 2026  
-**Institución:** Universidad Tecnológica Nacional — Facultad Regional Resistencia (UTN - FRRe)[cite: 15]
+**Institución:** Universidad Tecnológica Nacional — Facultad Regional Resistencia (UTN - FRRe)
 
 ---
 
 ## 🏗️ Arquitectura del Proyecto
 
-El código fuente está estructurado respetando las convenciones estándar de paquetes de Java y la separación de responsabilidades en tres capas independientes[cite: 5, 11]:
+El código fuente está estructurado respetando las convenciones estándar de paquetes de Java y la separación de responsabilidades en tres capas independientes:
 
 ```text
 TPFinalProg/
