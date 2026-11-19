@@ -8,7 +8,7 @@ El sistema implementa una aplicación de consola orientada a objetos para admini
 
 ## 👥 Integrantes del Equipo
 
-* **Gallardo, Guadalupe** — Legajo: `30229` — GitHub: ``
+* **Gallardo, Guadalupe** — Legajo: `30299` — GitHub: ``
 * **Quintero, Camila** — Legajo: `30300` — GitHub: ``
 
 
