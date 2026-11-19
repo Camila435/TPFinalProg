@@ -170,47 +170,32 @@ public class MainApp {
             // new invoca el constructor; los argumentos deben coincidir
             // con la firma declarada en cada clase del dominio.
             if (tipo == 1) {
-                Integer puertas = leerEntero("Cantidad de puertas (3 a 5) [0 para volver]: ", true);
-                if (puertas == null) {
-                    System.out.println("Operación cancelada. Volviendo al menú principal...");
-                    return;
-                }
+                // La cátedra no exige puertas; el dominio actual no almacena ese dato.
+
                 TipoCarroceria carroceria = elegirOpcionEnum("Carrocería de Automóvil", TipoCarroceria.paraAutos());
                 if (carroceria == null) {
                     System.out.println("Operación cancelada. Volviendo al menú principal...");
                     return;
                 }
-                nuevo = new Auto(marca, modelo, anio, patente, color, km, precioBase, puertas, carroceria);
+                nuevo = new Automovil(marca, modelo, anio, patente, color, km, precioBase, carroceria);
             } else if (tipo == 2) {
                 TipoCarroceria carroceria = elegirOpcionEnum("Carrocería de Camioneta", TipoCarroceria.paraCamionetas());
                 if (carroceria == null) {
                     System.out.println("Operación cancelada. Volviendo al menú principal...");
                     return;
                 }
-                Double carga = leerDouble("Capacidad de carga (kg) [0 para volver]: ", true);
-                if (carga == null) {
-                    System.out.println("Operación cancelada. Volviendo al menú principal...");
-                    return;
-                }
-                String resp4x4 = leerTextoConCancelacion("¿Posee tracción 4x4? (S/N) [0 para volver]: ");
-                if (resp4x4 == null) {
-                    System.out.println("Operación cancelada. Volviendo al menú principal...");
-                    return;
-                }
-                boolean es4x4 = resp4x4.equalsIgnoreCase("S");
-                nuevo = new Camioneta(marca, modelo, anio, patente, color, km, precioBase, carroceria, carga, es4x4);
+                // El dominio actual no define capacidad de carga ni tracción 4x4.
+
+                nuevo = new Camioneta(marca, modelo, anio, patente, color, km, precioBase, carroceria);
             } else {
-                Integer cilindrada = leerEntero("Cilindrada (cc) [0 para volver]: ", true);
-                if (cilindrada == null) {
-                    System.out.println("Operación cancelada. Volviendo al menú principal...");
-                    return;
-                }
+                // La cilindrada no forma parte del modelo de dominio actual.
+
                 TipoCarroceriaMoto tipoMoto = elegirOpcionEnum("Estilo de Motocicleta", TipoCarroceriaMoto.values());
                 if (tipoMoto == null) {
                     System.out.println("Operación cancelada. Volviendo al menú principal...");
                     return;
                 }
-                nuevo = new Motocicleta(marca, modelo, anio, patente, color, km, precioBase, cilindrada, tipoMoto);
+                nuevo = new Motocicleta(marca, modelo, anio, patente, color, km, precioBase, tipoMoto);
             }
 
             // DELEGACIÓN: la validación del inventario corresponde a
@@ -223,8 +208,6 @@ public class MainApp {
         // escriben antes que el catch de una superclase de excepción.
         } catch (PatenteInvalidaException e) {
             System.out.println("[ERROR DE PATENTE]: " + e.getMessage());
-        } catch (PuertasInsuficientesException e) {
-            System.out.println("[ERROR EN AUTOMÓVIL]: " + e.getMessage());
         } catch (DatoInvalidoException e) {
             System.out.println("[DATO INVÁLIDO]: " + e.getMessage());
         }
@@ -333,7 +316,7 @@ public class MainApp {
     // --- ENTORNO 3, 4 y 5: CONSULTAS Y FILTROS ---
 
     // FILTRADO POR TIPO: se invocan métodos de negocio que devuelven
-    // List<Auto>, List<Camioneta> o List<Motocicleta>.
+    // List<Automovil>, List<Camioneta> o List<Motocicleta>.
     private static void listarPorCategoria() {
         System.out.println("\n--- FILTRAR POR CATEGORÍA ---");
         System.out.println(" 1. Automóviles");
@@ -543,12 +526,12 @@ public class MainApp {
      */
     private static void cargarInventarioInicial() {
         try {
-            concesionaria.agregarVehiculo(new Auto("Toyota", "Corolla", 2024, "AG123CD", "Blanco", 0, 28000.0, 4, TipoCarroceria.SEDAN));
-            concesionaria.agregarVehiculo(new Auto("Ford", "Focus", 2019, "AD456EF", "Gris", 62000, 16500.0, 5, TipoCarroceria.HATCHBACK));
-            concesionaria.agregarVehiculo(new Camioneta("Toyota", "Hilux", 2023, "AF789GH", "Negro", 15000, 42000.0, TipoCarroceria.PICKUP, 1000.0, true));
-            concesionaria.agregarVehiculo(new Camioneta("Volkswagen", "Amarok", 2025, "AG999ZZ", "Azul", 0, 48000.0, TipoCarroceria.PICKUP, 1100.0, true));
-            concesionaria.agregarVehiculo(new Motocicleta("Honda", "CB 250 Twister", 2024, "A123BCD", "Rojo", 0, 5200.0, 250, TipoCarroceriaMoto.NAKED));
-            concesionaria.agregarVehiculo(new Motocicleta("Yamaha", "XTZ 125", 2021, "A098XYZ", "Blanco", 18500, 3100.0, 125, TipoCarroceriaMoto.ENDURO));
+            concesionaria.agregarVehiculo(new Automovil("Toyota", "Corolla", 2024, "AG123CD", "Blanco", 0, 28000.0, TipoCarroceria.SEDAN));
+            concesionaria.agregarVehiculo(new Automovil("Ford", "Focus", 2019, "AD456EF", "Gris", 62000, 16500.0, TipoCarroceria.HATCHBACK));
+            concesionaria.agregarVehiculo(new Camioneta("Toyota", "Hilux", 2023, "AF789GH", "Negro", 15000, 42000.0, TipoCarroceria.PICKUP));
+            concesionaria.agregarVehiculo(new Camioneta("Volkswagen", "Amarok", 2025, "AG999ZZ", "Azul", 0, 48000.0, TipoCarroceria.PICKUP));
+            concesionaria.agregarVehiculo(new Motocicleta("Honda", "CB 250 Twister", 2024, "A123BCD", "Rojo", 0, 5200.0, TipoCarroceriaMoto.NAKED));
+            concesionaria.agregarVehiculo(new Motocicleta("Yamaha", "XTZ 125", 2021, "A098XYZ", "Blanco", 18500, 3100.0, TipoCarroceriaMoto.ENDURO));
         } catch (DatoInvalidoException e) {
             System.err.println("Error al precargar inventario: " + e.getMessage());
         }
