@@ -1,5 +1,11 @@
 package concesionaria.dominio;
 
+/**
+ * Estilos y configuraciones de diseño para motocicletas.
+ *
+ * @author GyQ Concesionaria
+ * @version 1.0
+ */
 public enum TipoCarroceriaMoto {
     ENDURO("Enduro"),
     SCOOTER("Scooter"),
@@ -9,6 +15,11 @@ public enum TipoCarroceriaMoto {
 
     private final String descripcion;
 
+    /**
+     * Construye un estilo de motocicleta con su descripción.
+     *
+     * @param descripcion Nombre legible del estilo.
+     */
     TipoCarroceriaMoto(String descripcion) {
         this.descripcion = descripcion;
     }
