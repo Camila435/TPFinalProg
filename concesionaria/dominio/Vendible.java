@@ -4,7 +4,8 @@ package concesionaria.dominio;
  * Contrato comercial que define el cálculo del precio final de venta
  * para cualquier unidad comercializable en GyQ Concesionaria.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public interface Vendible {

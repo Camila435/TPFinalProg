@@ -3,7 +3,8 @@ package concesionaria.dominio;
 /**
  * Categorías principales de vehículos comercializados en la concesionaria.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public enum TipoVehiculo {

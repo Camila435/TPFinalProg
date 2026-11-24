@@ -4,7 +4,8 @@ package concesionaria.dominio;
  * Representa una motocicleta dentro de GyQ Concesionaria.
  * Cumple con el estándar JavaBean heredando {@link java.io.Serializable} desde {@link Vehiculo}.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.1
  */
 // 'extends Vehiculo' aplica HERENCIA: Motocicleta reutiliza todos los atributos comunes (marca, modelo,

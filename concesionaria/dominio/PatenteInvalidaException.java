@@ -4,7 +4,8 @@ package concesionaria.dominio;
  * Excepción lanzada cuando una patente no cumple con el formato nacional o Mercosur,
  * o cuando ya existe duplicada en el inventario.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public class PatenteInvalidaException extends DatoInvalidoException {

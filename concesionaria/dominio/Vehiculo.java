@@ -12,7 +12,8 @@ import java.util.Objects;
  * {@code serialVersionUID}) para permitir su persistencia en flujos binarios.
  * </p>
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.1
  */
 public abstract class Vehiculo implements Vendible, Serializable {

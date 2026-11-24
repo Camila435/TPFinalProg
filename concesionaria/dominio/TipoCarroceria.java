@@ -3,7 +3,8 @@ package concesionaria.dominio;
 /**
  * Tipos de carrocería disponibles para automóviles y camionetas.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public enum TipoCarroceria {

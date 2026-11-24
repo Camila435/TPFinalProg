@@ -4,7 +4,8 @@ package concesionaria.dominio;
  * Excepción verificada base para errores de validación de reglas de negocio
  * en las entidades del dominio de la concesionaria.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public class DatoInvalidoException extends Exception {

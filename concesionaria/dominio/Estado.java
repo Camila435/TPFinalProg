@@ -3,7 +3,8 @@ package concesionaria.dominio;
 /**
  * Enumeración que representa la condición comercial de uso de un vehículo.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public enum Estado {

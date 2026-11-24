@@ -24,7 +24,8 @@ import java.util.Map;
  * de {@link File} dentro del bloque {@code try} y cierre seguro en {@code finally}).
  * </p>
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public class GestorArchivosVehiculos {

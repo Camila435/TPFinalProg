@@ -3,12 +3,19 @@ package concesionaria.negocio;
 import concesionaria.dominio.Vehiculo;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
- * Clase genérica encargada de gestionar el lavado y el mantenimiento
- * preventivo de los vehículos de la concesionaria.
+ * Subclase concreta (<b>JavaBean</b>) que representa una Camioneta (SUV, Pick-Up
+ * o Furgón) dentro del inventario de ventas de GyQ Concesionaria.
+ * <p>
+ * Cumple formalmente con el estándar JavaBean: atributos estrictamente privados
+ * ({@code private}), constructor público sin argumentos ({@link #Camioneta()}),
+ * métodos accesores y mutadores estandarizados ({@code get}/{@code set}) e
+ * implementación de {@link java.io.Serializable} heredada de {@link Vehiculo}.
+ * </p>
  *
- * @param <T> Tipo de vehículo que extiende de {@link Vehiculo}.
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
+ * @version 1.2
  */
 // GENÉRICOS CON ACOTACIÓN SUPERIOR (<T extends Vehiculo>):
 // - <T> es un parámetro de tipo: permite crear tanto un TallerGeneral<Vehiculo> (multimarca/general),

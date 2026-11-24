@@ -1,8 +1,18 @@
 package concesionaria.dominio;
 
 /**
- * Subclase concreta que representa una Camioneta en GyQ Concesionaria.
- * Cumple el estándar JavaBean.
+ * Clase genérica acotada (<b>POJO</b> de servicio) encargada de gestionar el lavado
+ * obligatorio y el mantenimiento preventivo condicional de los vehículos de la concesionaria.
+ * <p>
+ * Utiliza el parámetro de tipo {@code <T extends Vehiculo>} para garantizar seguridad de tipos
+ * en tiempo de compilación (<i>type-safety</i>) y permitir tanto talleres multimarca generales
+ * como talleres especializados por subclase.
+ * </p>
+ *
+ * @param <T> Tipo de vehículo que extiende de {@link Vehiculo}.
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
+ * @version 1.2
  */
 // 'extends Vehiculo' aplica HERENCIA: Camioneta hereda los atributos, validaciones y contratos
 // (Vendible y Serializable) definidos en la superclase abstracta Vehiculo.

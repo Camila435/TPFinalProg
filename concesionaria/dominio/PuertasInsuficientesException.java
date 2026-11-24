@@ -2,7 +2,7 @@ package concesionaria.dominio;
 
 /**
  * Excepción lanzada cuando la cantidad de puertas de un automóvil
- * se encuentra fuera del rango permitido (3 a 5 puertas).
+ * se encuentra fuera del rango permitido (1 a 5 puertas).
  *
  * @author GyQ Concesionaria
  * @version 1.0

@@ -3,7 +3,8 @@ package concesionaria.dominio;
 /**
  * Estilos y configuraciones de diseño para motocicletas.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.0
  */
 public enum TipoCarroceriaMoto {

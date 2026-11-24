@@ -25,7 +25,8 @@ import java.util.Scanner;
  * Gestiona la experiencia del operador con persistencia automática en disco,
  * validación estricta de datos numéricos y cancelación unificada mediante 'Z'.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 2.0
  */
 public class MainApp {

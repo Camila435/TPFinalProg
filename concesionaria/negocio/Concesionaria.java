@@ -18,7 +18,8 @@ import java.util.Map;
  * Capa de NEGOCIO (POJO): gestiona el inventario de ventas y el catálogo dinámico
  * de marcas y modelos de GyQ Concesionaria.
  *
- * @author GyQ Concesionaria
+ * @author Camila Quintero
+ * @author Guadalupe Gallardo
  * @version 1.1
  */
 // Clase POJO pura de lógica de negocio: NO contiene ningún System.out.println ni Scanner;

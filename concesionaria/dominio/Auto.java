@@ -4,7 +4,8 @@ package concesionaria.dominio;
  * Representa un automóvil dentro del inventario de ventas de GyQ Concesionaria.
  * Cumple con el estándar JavaBean heredando {@link java.io.Serializable} desde {@link Vehiculo}.
  *
- * @author GyQ Concesionaria
+  * @author Camila Quintero
+* @author Guadalupe Gallardo
  * @version 1.2
  */
 // 'extends Vehiculo' aplica HERENCIA: Auto hereda todos los atributos y métodos de la superclase abstracta Vehiculo,
