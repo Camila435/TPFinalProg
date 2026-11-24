@@ -68,11 +68,11 @@ public class Auto extends Vehiculo {
         return cantPuertas;
     }
 
-    // Lanza una excepción propia (PuertasInsuficientesException, que hereda de DatoInvalidoException)
-    // si intentan crear o modificar un auto con menos de 3 o más de 5 puertas.
+   // Lanza una excepción propia (PuertasInsuficientesException, que hereda de DatoInvalidoException)
+    // si intentan crear o modificar un auto con menos de 1 o más de 5 puertas.
     public void setCantPuertas(Integer cantPuertas) throws PuertasInsuficientesException {
-        if (cantPuertas == null || cantPuertas.intValue() < 3 || cantPuertas.intValue() > 5) {
-            throw new PuertasInsuficientesException("Un automóvil debe tener entre 3 y 5 puertas.");
+        if (cantPuertas == null || cantPuertas < 1 || cantPuertas > 5) {
+            throw new PuertasInsuficientesException("Un automóvil debe tener entre 1 y 5 puertas.");
         }
         this.cantPuertas = cantPuertas;
     }

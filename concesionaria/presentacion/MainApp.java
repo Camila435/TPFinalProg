@@ -1,4 +1,4 @@
-package presentacion;
+package concesionaria.presentacion;
 
 import concesionaria.dominio.Auto;
 import concesionaria.dominio.Camioneta;
@@ -10,9 +10,10 @@ import concesionaria.dominio.PuertasInsuficientesException;
 import concesionaria.dominio.TipoCarroceria;
 import concesionaria.dominio.TipoCarroceriaMoto;
 import concesionaria.dominio.Vehiculo;
-import negocio.Concesionaria;
-import negocio.GestorArchivosVehiculos;
-import negocio.TallerGeneral;
+import concesionaria.negocio.Concesionaria;
+import concesionaria.negocio.GestorArchivosVehiculos;
+import concesionaria.negocio.TallerGeneral;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -216,7 +217,7 @@ public class MainApp {
             Vehiculo nuevo = null;
 
             if (tipo == 1) {
-                Integer puertas = leerEntero("Cantidad de puertas (3 a 5): ", true);
+                Integer puertas = leerEntero("Cantidad de puertas (1 a 5): ", true);
                 if (puertas == null) return;
 
                 Object carroceriaSel = elegirCarroceriaConOpcionNueva("Carrocería de Automóvil", TipoCarroceria.paraAutos());
