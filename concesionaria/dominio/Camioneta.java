@@ -1,135 +1,141 @@
 package concesionaria.dominio;
 
 /**
- * Representa una camioneta (SUV, Pick-up o Furgón) en GyQ Concesionaria.
- * Cumple con el estándar JavaBean heredando {@link java.io.Serializable} desde {@link Vehiculo}.
- *
- * @author GyQ Concesionaria
- * @version 1.1
+ * Subclase concreta que representa una Camioneta en GyQ Concesionaria.
+ * Cumple el estándar JavaBean.
  */
+// 'extends Vehiculo' aplica HERENCIA: Camioneta hereda los atributos, validaciones y contratos
+// (Vendible y Serializable) definidos en la superclase abstracta Vehiculo.
 public class Camioneta extends Vehiculo {
 
+    // Control de versión para la serialización binaria (.dat), exigido por Serializable
     private static final long serialVersionUID = 1L;
 
-    private TipoCarroceria tipoCarroceria;
-    private Double capacidadCargaKg;
-    private Boolean tiene4x4;
+    // =========================================================================
+    // 1. AMBIENTE DE ATRIBUTOS PROPIOS (ENCAPSULAMIENTO ESTRICTO + WRAPPERS)
+    // =========================================================================
+    // Atributos 'private' usando clases Wrapper (Double, Boolean) según la convención JavaBean:
+    private TipoCarroceria tipoCarroceria;  // Constante del Enum (PICKUP, SUV, FURGON)
+    private String carroceriaPersonalizada; // Texto libre si el operador elige "Otra" en el menú
+    private Double capacidadCargaKg;        // Capacidad máxima de carga en kilogramos (debe ser > 0)
+    private Boolean traccion4x4;            // Indica si posee doble tracción (true = 4x4, false = 4x2)
 
-    /**
-     * Constructor vacío requerido por el estándar JavaBean.
-     */
+    // =========================================================================
+    // 2. CONSTRUCTORES (SOBRECARGA DE CONSTRUCTORES)
+    // =========================================================================
+
+    // Constructor vacío obligatorio para cumplir el estándar JavaBean
     public Camioneta() {
-        super();
+        super(); // Invoca al constructor sin argumentos de Vehiculo
     }
 
-    /**
-     * Construye una instancia completa de camioneta validando sus atributos.
-     *
-     * @param marca            Marca del fabricante.
-     * @param modelo           Modelo de la camioneta.
-     * @param anio             Año de fabricación.
-     * @param patente          Patente identificatoria.
-     * @param color            Color exterior.
-     * @param kilometraje      Kilometraje actual.
-     * @param precioBase       Precio base de lista.
-     * @param tipoCarroceria   Carrocería válida para camioneta (SUV, Pick-up o Furgón).
-     * @param capacidadCargaKg Capacidad máxima de carga en kilogramos.
-     * @param tiene4x4         Indica si posee tracción integral 4x4.
-     * @throws DatoInvalidoException Si algún parámetro no supera las validaciones.
-     */
-    public Camioneta(String marca, String modelo, Integer anio, String patente,
-                     String color, Integer kilometraje, Double precioBase,
-                     TipoCarroceria tipoCarroceria, Double capacidadCargaKg, Boolean tiene4x4) throws DatoInvalidoException {
+    // Constructor principal cuando la carrocería proviene del Enum TipoCarroceria
+    public Camioneta(String marca, String modelo, Integer anio, String patente, String color,
+                     Integer kilometraje, Double precioBase, TipoCarroceria tipoCarroceria,
+                     Double capacidadCargaKg, Boolean traccion4x4) throws DatoInvalidoException {
+        // Delega a la superclase Vehiculo la carga y validación de los 7 datos comunes
         super(marca, modelo, anio, patente, color, kilometraje, precioBase);
+        // Inicializa los atributos específicos de Camioneta pasando por sus setters con validación
         setTipoCarroceria(tipoCarroceria);
         setCapacidadCargaKg(capacidadCargaKg);
-        setTiene4x4(tiene4x4);
+        setTraccion4x4(traccion4x4);
     }
 
-    /**
-     * Obtiene el tipo de carrocería de la camioneta.
-     *
-     * @return Constante de {@link TipoCarroceria}.
-     */
-    public TipoCarroceria getTipoCarroceria() {
-        return tipoCarroceria;
+    // Constructor sobrecargado cuando el operador escribe una carrocería nueva manualmente
+    public Camioneta(String marca, String modelo, Integer anio, String patente, String color,
+                     Integer kilometraje, Double precioBase, String carroceriaPersonalizada,
+                     Double capacidadCargaKg, Boolean traccion4x4) throws DatoInvalidoException {
+        super(marca, modelo, anio, patente, color, kilometraje, precioBase);
+        setCarroceriaPersonalizada(carroceriaPersonalizada);
+        setCapacidadCargaKg(capacidadCargaKg);
+        setTraccion4x4(traccion4x4);
     }
 
-    /**
-     * Establece la carrocería verificando que corresponda a camioneta.
-     *
-     * @param tipoCarroceria Carrocería a asignar.
-     * @throws DatoInvalidoException Si no es SUV, PICKUP o FURGON.
-     */
-    public void setTipoCarroceria(TipoCarroceria tipoCarroceria) throws DatoInvalidoException {
-        if (tipoCarroceria != TipoCarroceria.SUV && tipoCarroceria != TipoCarroceria.PICKUP
-                && tipoCarroceria != TipoCarroceria.FURGON) {
-            throw new DatoInvalidoException("La carrocería '" + tipoCarroceria + "' no corresponde a una camioneta.");
-        }
-        this.tipoCarroceria = tipoCarroceria;
-    }
+    // =========================================================================
+    // 3. MÉTODOS POLIMÓRFICOS SOBRESCRITOS (@Override)
+    // =========================================================================
 
-    /**
-     * Obtiene la capacidad de carga en kilogramos.
-     *
-     * @return Capacidad de carga.
-     */
-    public Double getCapacidadCargaKg() {
-        return capacidadCargaKg;
-    }
-
-    /**
-     * Establece la capacidad de carga validando que sea positiva.
-     *
-     * @param capacidadCargaKg Carga máxima en kg.
-     * @throws DatoInvalidoException Si es nula o menor o igual a 0.
-     */
-    public void setCapacidadCargaKg(Double capacidadCargaKg) throws DatoInvalidoException {
-        if (capacidadCargaKg == null || capacidadCargaKg.doubleValue() <= 0) {
-            throw new DatoInvalidoException("La capacidad de carga debe ser mayor a 0 kg.");
-        }
-        this.capacidadCargaKg = capacidadCargaKg;
-    }
-
-    /**
-     * Indica si la unidad cuenta con tracción 4x4.
-     *
-     * @return {@code true} si posee tracción 4x4.
-     */
-    public Boolean getTiene4x4() {
-        return tiene4x4;
-    }
-
-    /**
-     * Establece si posee tracción integral 4x4.
-     *
-     * @param tiene4x4 Valor booleano de tracción.
-     */
-    public void setTiene4x4(Boolean tiene4x4) {
-        this.tiene4x4 = (tiene4x4 != null) ? tiene4x4 : Boolean.FALSE;
-    }
-
+    // Implementa el método abstracto de Vehiculo identificando esta subclase como CAMIONETA
     @Override
     public TipoVehiculo getTipo() {
         return TipoVehiculo.CAMIONETA;
     }
 
+    // Devuelve la carrocería personalizada si fue cargada; de lo contrario, el nombre del Enum
     @Override
     public String getCarroceria() {
-        return tipoCarroceria != null ? tipoCarroceria.toString() : "Sin definir";
+        if (carroceriaPersonalizada != null && !carroceriaPersonalizada.trim().isEmpty()) {
+            return carroceriaPersonalizada.trim();
+        }
+        return tipoCarroceria != null ? tipoCarroceria.toString() : "Sin especificar";
     }
 
+    // Implementa el contrato de Vendible: aplica un 15% si es 0 KM (1.15) o un 8% si es usada (1.08),
+    // y suma un adicional del 5% (+ 0.05) si la camioneta cuenta con tracción 4x4.
     @Override
     public double calcularPrecioFinal() {
-        double factor = esNuevo() ? 1.12 : 1.05;
-        double extra4x4 = Boolean.TRUE.equals(tiene4x4) ? 1500.0 : 0.0;
-        return (getPrecioBase() * factor) + extra4x4;
+        double factor = esNuevo() ? 1.15 : 1.08;
+        // Boolean.TRUE.equals(...) evita NullPointerException si traccion4x4 llegara a ser null
+        if (Boolean.TRUE.equals(traccion4x4)) {
+            factor += 0.05;
+        }
+        return getPrecioBase() * factor;
     }
 
+    // =========================================================================
+    // 4. MÉTODOS ACCESORES Y MUTADORES (GETTERS Y SETTERS CON VALIDACIÓN)
+    // =========================================================================
+
+    public TipoCarroceria getTipoCarroceria() {
+        return tipoCarroceria;
+    }
+
+    public void setTipoCarroceria(TipoCarroceria tipoCarroceria) throws DatoInvalidoException {
+        if (tipoCarroceria == null) {
+            throw new DatoInvalidoException("Debe seleccionar un tipo de carrocería.");
+        }
+        this.tipoCarroceria = tipoCarroceria;
+        this.carroceriaPersonalizada = null; // Anula la carrocería personalizada para evitar ambigüedad
+    }
+
+    public String getCarroceriaPersonalizada() {
+        return carroceriaPersonalizada;
+    }
+
+    public void setCarroceriaPersonalizada(String carroceriaPersonalizada) throws DatoInvalidoException {
+        if (carroceriaPersonalizada == null || carroceriaPersonalizada.trim().isEmpty()) {
+            throw new DatoInvalidoException("La descripción de la carrocería no puede estar vacía.");
+        }
+        this.carroceriaPersonalizada = carroceriaPersonalizada.trim();
+        this.tipoCarroceria = null; // Anula el Enum para priorizar el texto ingresado manualmente
+    }
+
+    public Double getCapacidadCargaKg() {
+        return capacidadCargaKg;
+    }
+
+    // Regla de negocio: ninguna camioneta puede registrarse con capacidad de carga nula, cero o negativa
+    public void setCapacidadCargaKg(Double capacidadCargaKg) throws DatoInvalidoException {
+        if (capacidadCargaKg == null || capacidadCargaKg <= 0) {
+            throw new DatoInvalidoException("La capacidad de carga debe ser mayor a 0 kg.");
+        }
+        this.capacidadCargaKg = capacidadCargaKg;
+    }
+
+    public Boolean getTraccion4x4() {
+        return traccion4x4;
+    }
+
+    // Si pasan null, asume por defecto false (tracción simple 4x2)
+    public void setTraccion4x4(Boolean traccion4x4) {
+        this.traccion4x4 = traccion4x4 != null ? traccion4x4 : false;
+    }
+
+    // Redefine toString() reutilizando la salida base de Vehiculo ('super.toString()')
+    // y agregando la capacidad de carga, si es 4x4 ("Sí"/"No") y el precio final calculado.
     @Override
     public String toString() {
-        String traccion = Boolean.TRUE.equals(tiene4x4) ? "4x4" : "4x2";
-        return super.toString() + String.format(" | Carga: %.0f kg | Tracción: %s | Precio Final: $%.2f",
-                capacidadCargaKg, traccion, calcularPrecioFinal());
+        return super.toString() + String.format(" | Carga: %.0f kg | 4x4: %s | Precio Final: $%.2f",
+                capacidadCargaKg, Boolean.TRUE.equals(traccion4x4) ? "Sí" : "No", calcularPrecioFinal());
     }
 }
