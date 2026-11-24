@@ -43,3 +43,5 @@ TPFinalProg/
     │
     └── presentacion/                   # Interfaz de usuario por consola
         └── MainApp.java                # Menú interactivo, precarga de datos y lectura segura
+ 
+[Ver diagrama UML actualizado](https://viewer.diagrams.net/#G1A7t_kIoUzXVzktGPgHm5gfvSkHQ398QY) 
