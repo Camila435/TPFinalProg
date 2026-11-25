@@ -8,8 +8,8 @@ El sistema implementa una aplicación de consola orientada a objetos para admini
 
 ## 👥 Integrantes del Equipo
 
-* **Gallardo, Guadalupe** — Legajo: `30299` — GitHub: ``
-* **Quintero, Camila** — Legajo: `30300` — GitHub: ``
+* **Gallardo, Guadalupe** — Legajo: `30299` — GitHub: `GALLARDOGUADALUPELISABETH`
+* **Quintero, Camila** — Legajo: `30300` — GitHub: `Camila435`
 
 
 **Cátedra:** Programación II — Ciclo Lectivo 2026  
@@ -44,4 +44,4 @@ TPFinalProg/
     └── presentacion/                   # Interfaz de usuario por consola
         └── MainApp.java                # Menú interactivo, precarga de datos y lectura segura
  
-[Ver diagrama UML actualizado](https://viewer.diagrams.net/#G1A7t_kIoUzXVzktGPgHm5gfvSkHQ398QY) 
+Ver diagrama UML  --> https://viewer.diagrams.net/#G1A7t_kIoUzXVzktGPgHm5gfvSkHQ398QY 
