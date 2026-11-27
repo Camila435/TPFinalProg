@@ -47,14 +47,6 @@ TPFinalProg/
 
 [Ver diagrama UML actualizado](https://viewer.diagrams.net/#G1A7t_kIoUzXVzktGPgHm5gfvSkHQ398QY)
 
-## ▶️ Compilación y ejecución (Windows CMD)
-
-Desde la carpeta raíz del repositorio, con el JDK instalado:
-
-```cmd
-javac -encoding UTF-8 -d out concesionaria\dominio\*.java concesionaria\negocio\*.java concesionaria\presentacion\*.java
-java -cp out concesionaria.presentacion.Main
-```
 
 ## 💾 Persistencia
 
