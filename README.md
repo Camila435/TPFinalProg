@@ -1,28 +1,23 @@
 # 🚗 GyQ Concesionaria Multimarca — Sistema de Gestión de Inventario y Ventas
 
-Proyecto práctico desarrollado en **Java** para la asignatura **Programación II** de la **Tecnicatura Universitaria en Programación (UTN - Facultad Regional Resistencia)**
+Proyecto práctico desarrollado en **Java** para la asignatura **Programación II** de la **Tecnicatura Universitaria en Programación (UTN - Facultad Regional Resistencia)**.
 
-El sistema implementa una aplicación de consola orientada a objetos para administrar el inventario, catálogo dinámico de marcas/modelos y ventas de vehículos multimarca (**Automóviles**, **Camionetas** y **Motocicletas**), aplicando arquitectura en capas, encapsulamiento estricto, herencia, polimorfismo, manejo de excepciones personalizadas y colecciones genéricas.
+El sistema implementa una aplicación de consola orientada a objetos para administrar el inventario, catálogo dinámico de marcas/modelos y ventas de vehículos multimarca (automóviles, camionetas y motocicletas), aplicando arquitectura en capas, encapsulamiento, herencia, polimorfismo, excepciones personalizadas y colecciones genéricas.
 
----
+## 👥 Integrantes del equipo
 
-## 👥 Integrantes del Equipo
-
-* **Gallardo, Guadalupe** — Legajo: `30299` — GitHub: `GALLARDOGUADALUPELISABETH`
-* **Quintero, Camila** — Legajo: `30300` — GitHub: `Camila435`
-
+- **Gallardo, Guadalupe** — Legajo: `30299` — GitHub: `GALLARDOGUADALUPELISABETH`
+- **Quintero, Camila** — Legajo: `30300` — GitHub: `Camila435`
 
 **Cátedra:** Programación II — Ciclo Lectivo 2026  
 **Institución:** Universidad Tecnológica Nacional — Facultad Regional Resistencia (UTN - FRRe)
 
----
-
-## 🏗️ Arquitectura del Proyecto
-
-El código fuente está estructurado respetando las convenciones estándar de paquetes de Java y la separación de responsabilidades en tres capas independientes:
+## 🏗️ Arquitectura del proyecto
 
 ```text
 TPFinalProg/
+├── README.md
+├── inventario_maestro.dat              # Persistencia binaria del inventario
 └── concesionaria/
     ├── dominio/                        # Modelo de negocio, contratos y reglas de validación
     │   ├── Estado.java                 # Enumerado: NUEVO (0 KM) / USADO
@@ -38,10 +33,29 @@ TPFinalProg/
     │   ├── Camioneta.java              # Subclase concreta con carga útil y tracción 4x4
     │   └── Motocicleta.java            # Subclase concreta con cilindrada y estilo de moto
     │
-    ├── negocio/                        # Lógica comercial y gestión de colecciones en memoria
-    │   └── Concesionaria.java          # Administración de stock, catálogo dinámico y ventas
+    ├── negocio/                        # Lógica comercial, gestión de colecciones y persistencia
+    │   ├── Concesionaria.java          # Administración de stock, catálogo dinámico y ventas
+    │   ├── GestorArchivosVehiculos.java # Serialización y deserialización binaria de vehículos
+    │   └── TallerGeneral.java          # Clase genérica para alistamiento y service de vehículos
     │
     └── presentacion/                   # Interfaz de usuario por consola
-        └── MainApp.java                # Menú interactivo, precarga de datos y lectura segura
- 
-Ver diagrama UML  --> https://viewer.diagrams.net/#G1A7t_kIoUzXVzktGPgHm5gfvSkHQ398QY 
+        ├── Main.java                   # Punto de entrada y orquestación del menú principal
+        └── MenuConsola.java            # Menú interactivo, persistencia automática y lectura segura
+```
+
+## 📐 Diagrama UML
+
+[Ver diagrama UML actualizado](https://viewer.diagrams.net/#G1A7t_kIoUzXVzktGPgHm5gfvSkHQ398QY)
+
+## ▶️ Compilación y ejecución (Windows CMD)
+
+Desde la carpeta raíz del repositorio, con el JDK instalado:
+
+```cmd
+javac -encoding UTF-8 -d out concesionaria\dominio\*.java concesionaria\negocio\*.java concesionaria\presentacion\*.java
+java -cp out concesionaria.presentacion.Main
+```
+
+## 💾 Persistencia
+
+El archivo `inventario_maestro.dat` almacena los vehículos mediante serialización binaria. Se debe ejecutar el programa desde la raíz del proyecto para utilizar el archivo de inventario correspondiente.
