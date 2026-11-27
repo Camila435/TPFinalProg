@@ -66,8 +66,7 @@ public abstract class Vehiculo implements Vendible, Serializable {
      * @param precioBase  Precio base de lista antes de impuestos.
      * @throws DatoInvalidoException Si alguno de los valores incumple las reglas de dominio.
      */
-    // En lugar d. no es gettere asignar 'this.marca = marca' directo, delega cada dato a su setter
-    // java beam 
+    // En lugar de asignar 'this.marca = marca' directo, delega cada dato a su setter
     // para garantizar que ningún vehículo nazca en un estado inválido.
     public Vehiculo(String marca, String modelo, Integer anio, String patente,
                     String color, Integer kilometraje, Double precioBase) throws DatoInvalidoException {
