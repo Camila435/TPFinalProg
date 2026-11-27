@@ -8,6 +8,7 @@ package concesionaria.dominio;
  * @author Guadalupe Gallardo
  * @version 1.0
  */
+// Define un contrato común para las clases de objetos que pueden venderse.
 public interface Vendible {
 
     /**
@@ -16,5 +17,6 @@ public interface Vendible {
      *
      * @return Precio final en moneda local/divisa configurada.
      */
+    // Las clases que implementen esta interfaz deben calcular y devolver el precio final.
     double calcularPrecioFinal();
 }

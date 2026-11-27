@@ -1,7 +1,5 @@
 package concesionaria.negocio;
 
-import concesionaria.dominio.DatoInvalidoException;
-import concesionaria.dominio.Estado;
 import concesionaria.dominio.Vehiculo;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,14 +8,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Clase de persistencia (POJO) encargada de la serialización y deserialización
- * binaria del inventario de vehículos de GyQ Concesionaria, así como de las
- * operaciones de clonado, reciclado y apareo de archivos.
+ * binaria del inventario de vehículos de GyQ Concesionaria.
  * <p>
  * Sigue estrictamente el manejo explícito de flujos ({@link ObjectInputStream} y
  * {@link ObjectOutputStream} inicializados en {@code null}, verificación y creación
@@ -26,7 +21,7 @@ import java.util.Map;
  *
  * @author Camila Quintero
  * @author Guadalupe Gallardo
- * @version 1.0
+ * @version 1.1
  */
 public class GestorArchivosVehiculos {
 
@@ -36,6 +31,10 @@ public class GestorArchivosVehiculos {
 
     /**
      * Serializa y guarda una lista de vehículos en un archivo binario.
+     *
+     * @param rutaArchivo Ruta o nombre del archivo en disco (ej. "inventario_maestro.dat").
+     * @param vehiculos   Lista de vehículos a persistir.
+     * @throws IOException Si ocurre un error de entrada/salida al escribir en disco.
      */
     public void guardarVehiculos(String rutaArchivo, List<Vehiculo> vehiculos) throws IOException {
         // Paso 1: Se declara el flujo de salida de objetos en 'null' ANTES del bloque try,
@@ -48,13 +47,13 @@ public class GestorArchivosVehiculos {
                 archivo.createNewFile();
             }
 
-            // Paso 3: Se encadenan dos flujos (Decorator pattern):
+            // Paso 3: Se encadenan dos flujos (patrón Decorator):
             // FileOutputStream abre el canal de bytes hacia el archivo físico,
-            // y ObjectOutputStream convierte el grafo de objetos Java a secuencia de bytes.
+            // y ObjectOutputStream convierte los objetos Java en secuencia de bytes.
             out = new ObjectOutputStream(new FileOutputStream(archivo));
 
             // Paso 4: Se envuelve en un new ArrayList<>(vehiculos) para garantizar que la colección
-            // raíz sea 100% Serializable (ej. si pasaran una vista interna no serializable) y se escribe.
+            // raíz sea 100% Serializable y se graba completa en disco.
             out.writeObject(new ArrayList<>(vehiculos));
             out.flush(); // Fuerza el vaciado del búfer en memoria hacia el disco duro
         } finally {
@@ -76,6 +75,11 @@ public class GestorArchivosVehiculos {
 
     /**
      * Lee y deserializa la lista de vehículos almacenada en un archivo binario.
+     *
+     * @param rutaArchivo Ruta o nombre del archivo en disco a leer.
+     * @return Lista de vehículos recuperada (o lista vacía si el archivo es nuevo).
+     * @throws IOException            Si ocurre un error al leer el archivo.
+     * @throws ClassNotFoundException Si no se encuentra la clase de los objetos serializados.
      */
     @SuppressWarnings("unchecked") // Suprime la advertencia de compilador por el cast genérico (List<Vehiculo>)
     public List<Vehiculo> leerVehiculos(String rutaArchivo) throws IOException, ClassNotFoundException {
@@ -112,87 +116,5 @@ public class GestorArchivosVehiculos {
                 }
             }
         }
-    }
-
-    // =========================================================================
-    // 3. CLONADO DE ARCHIVOS (COPIA DE SEGURIDAD / BACKUP)
-    // =========================================================================
-
-    /**
-     * <b>CLONADO DE ARCHIVOS:</b> Genera una copia exacta e independiente de un archivo
-     * binario de vehículos hacia un archivo destino (respaldo/backup).
-     */
-    public int clonarArchivo(String rutaOrigen, String rutaDestino) throws IOException, ClassNotFoundException {
-        // Lee todos los registros serializados del archivo origen y los vuelve a serializar en el destino
-        List<Vehiculo> registrosOriginales = leerVehiculos(rutaOrigen);
-        guardarVehiculos(rutaDestino, registrosOriginales);
-        return registrosOriginales.size(); // Informa cuántos registros se respaldaron
-    }
-
-    // =========================================================================
-    // 4. RECICLADO DE ARCHIVOS (DEPURACIÓN POR CRITERIO DE NEGOCIO)
-    // =========================================================================
-
-    /**
-     * <b>RECICLADO DE ARCHIVOS:</b> Depura un archivo binario generando un nuevo archivo
-     * limpio que conserva únicamente los vehículos que cumplen con el estado comercial
-     * requerido.
-     */
-    public int reciclarArchivoPorEstado(String rutaOrigen, String rutaReciclado, Estado estadoConservar)
-            throws IOException, ClassNotFoundException {
-        // Paso 1: Deserializa todos los vehículos del archivo original
-        List<Vehiculo> todos = leerVehiculos(rutaOrigen);
-        List<Vehiculo> reciclados = new ArrayList<>();
-
-        // Paso 2: Recorre y selecciona únicamente aquellos que coinciden con el Enum estadoConservar (ej. NUEVO)
-        for (Vehiculo v : todos) {
-            if (v != null && v.getEstado() == estadoConservar) {
-                reciclados.add(v);
-            }
-        }
-
-        // Paso 3: Graba el subconjunto depurado en un nuevo archivo binario sin alterar el original
-        guardarVehiculos(rutaReciclado, reciclados);
-        return reciclados.size();
-    }
-
-    // =========================================================================
-    // 5. APAREO DE ARCHIVOS (SINCRONIZACIÓN MAESTRO + NOVEDADES)
-    // =========================================================================
-
-    /**
-     * <b>APAREO DE ARCHIVOS:</b> Combina y sincroniza un archivo maestro de inventario con un
-     * archivo de novedades/movimientos, generando un archivo maestro actualizado sin duplicados.
-     */
-    public int aparearArchivos(String rutaMaestro, String rutaNovedades, String rutaActualizado)
-            throws IOException, ClassNotFoundException, DatoInvalidoException {
-        // Paso 1: Recupera ambos archivos binarios a memoria
-        List<Vehiculo> listaMaestro = leerVehiculos(rutaMaestro);
-        List<Vehiculo> listaNovedades = leerVehiculos(rutaNovedades);
-
-        // Paso 2: Utiliza un LinkedHashMap indexado por patente (clave primaria) para fusionar sin duplicados
-        Map<String, Vehiculo> mapaConsolidado = new LinkedHashMap<>();
-
-        // Paso 3: Carga primero todo el inventario maestro actual
-        for (Vehiculo v : listaMaestro) {
-            if (v != null) {
-                mapaConsolidado.put(v.getPatente(), v);
-            }
-        }
-
-        // Paso 4: Aplica las novedades sobre el mismo mapa:
-        // - Si la patente YA existía en el maestro, mapa.put() sobrescribe el registro (actualiza precio/datos).
-        // - Si la patente NO existía, mapa.put() inserta el nuevo ingreso al final.
-        for (Vehiculo novedad : listaNovedades) {
-            if (novedad == null) {
-                throw new DatoInvalidoException("Registro nulo encontrado en el archivo de novedades.");
-            }
-            mapaConsolidado.put(novedad.getPatente(), novedad);
-        }
-
-        // Paso 5: Convierte los valores consolidados a List y los serializa en el archivo resultante
-        List<Vehiculo> resultadoFinal = new ArrayList<>(mapaConsolidado.values());
-        guardarVehiculos(rutaActualizado, resultadoFinal);
-        return resultadoFinal.size();
     }
 }

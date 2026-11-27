@@ -145,7 +145,8 @@ public class Camioneta extends Vehiculo {
     // y agregando la capacidad de carga, si es 4x4 ("Sí"/"No") y el precio final calculado.
     @Override
     public String toString() {
-        return super.toString() + String.format(" | Carga: %.0f kg | 4x4: %s | Precio Final: $%.2f",
-                capacidadCargaKg, Boolean.TRUE.equals(traccion4x4) ? "Sí" : "No", calcularPrecioFinal());
+        long precioFinal = Math.round(calcularPrecioFinal());
+        String texto4x4 = Boolean.TRUE.equals(traccion4x4) ? "Sí" : "No";
+        return super.toString() + " | Carga: " + Math.round(capacidadCargaKg) + " kg | 4x4: " + texto4x4 + " | Precio Final: $" + precioFinal;
     }
 }

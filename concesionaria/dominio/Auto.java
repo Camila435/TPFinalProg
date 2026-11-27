@@ -33,7 +33,7 @@ public class Auto extends Vehiculo {
      * Constructor vacío requerido por el estándar JavaBean.
      */
     public Auto() {
-        super(); // Llama al constructor sin parámetros de la superclase Vehiculo
+        super(); // Llama al constructor sin parámetros de la superclase Vehiculo para traer la estructura base de atributos comunes.
     }
 
     /**
@@ -42,7 +42,8 @@ public class Auto extends Vehiculo {
     public Auto(String marca, String modelo, Integer anio, String patente,
                 String color, Integer kilometraje, Double precioBase,
                 Integer cantPuertas, TipoCarroceria tipoCarroceria) throws DatoInvalidoException {
-        // 'super(...)' delega a Vehiculo la inicialización y validación de los 7 atributos comunes
+                    // lanza DatoInvalidoException si alguno de los 7 atributos comunes es inválido (heredado de Vehiculo)
+                    // 'super(...)' delega a Vehiculo la inicialización y validación de los 7 atributos comunes
         super(marca, modelo, anio, patente, color, kilometraje, precioBase);
         // Luego valida e inicializa los 2 atributos propios de Auto usando sus setters (no asignación directa)
         setCantPuertas(cantPuertas);
@@ -134,8 +135,9 @@ public class Auto extends Vehiculo {
     // Redefine toString() reutilizando el formato base de la superclase ('super.toString()')
     // y concatenándole los datos propios del automóvil (puertas y precio final calculado).
     @Override
+    
     public String toString() {
-        return super.toString() + String.format(" | Puertas: %d | Precio Final: $%.2f",
-                cantPuertas, calcularPrecioFinal());
+        long precioFinal = Math.round(calcularPrecioFinal());
+        return super.toString() + " | Puertas: " + cantPuertas + " | Precio Final: $" + precioFinal;
     }
 }

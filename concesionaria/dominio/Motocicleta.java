@@ -124,7 +124,7 @@ public class Motocicleta extends Vehiculo {
     // y agregándole la cilindrada en cc y el precio final calculado.
     @Override
     public String toString() {
-        return super.toString() + String.format(" | Cilindrada: %d cc | Precio Final: $%.2f",
-                cilindrada, calcularPrecioFinal());
+        long precioFinal = Math.round(calcularPrecioFinal());
+        return super.toString() + " | Cilindrada: " + cilindrada + " cc | Precio Final: $" + precioFinal;
     }
 }
