@@ -39,7 +39,7 @@ public abstract class Vehiculo implements Vendible, Serializable {
     private Integer anio;
     private String patente;
     private String color;
-    private Integer kilometraje;
+    private Integer kilometraje;    
     private Double precioBase;
 
     // =========================================================================
@@ -55,6 +55,7 @@ public abstract class Vehiculo implements Vendible, Serializable {
 
     /**
      * Constructor parametrizado que inicializa y valida todos los atributos comunes.
+     * 
      *
      * @param marca       Fabricante del vehículo.
      * @param modelo      Denominación comercial del modelo.
@@ -65,7 +66,8 @@ public abstract class Vehiculo implements Vendible, Serializable {
      * @param precioBase  Precio base de lista antes de impuestos.
      * @throws DatoInvalidoException Si alguno de los valores incumple las reglas de dominio.
      */
-    // En lugar de asignar 'this.marca = marca' directo, delega cada dato a su setter
+    // En lugar d. no es gettere asignar 'this.marca = marca' directo, delega cada dato a su setter
+    // java beam 
     // para garantizar que ningún vehículo nazca en un estado inválido.
     public Vehiculo(String marca, String modelo, Integer anio, String patente,
                     String color, Integer kilometraje, Double precioBase) throws DatoInvalidoException {
