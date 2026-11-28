@@ -51,3 +51,13 @@ TPFinalProg/
 ## 💾 Persistencia
 
 El archivo `inventario_maestro.dat` almacena los vehículos mediante serialización binaria. Se debe ejecutar el programa desde la raíz del proyecto para utilizar el archivo de inventario correspondiente.
+
+## 📖 Documentación (Javadoc)
+
+La documentación completa de paquetes, clases y métodos se encuentra generada dentro de la carpeta doc/. Para visualizarla:
+
+Ubicarse en la carpeta doc/ dentro del proyecto.
+
+Seleccionar el archivo index.html y elegir la opción "Mostrar en el Explorador de archivos" (o abrir la carpeta doc/ directamente desde el explorador del sistema).
+
+Hacer doble clic sobre el archivo index.html para abrir la documentación en el navegador web.
